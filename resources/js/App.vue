@@ -1,15 +1,23 @@
 <template>
     <div>
-        <h1>Vue 3 App</h1>
+        <Checkout />
     </div>
 </template>
 
 <script>
+import Checkout from "./pages/Checkout";
 export default {
-    name: "App.vue"
+    name: "App.vue",
+    components: {
+        Checkout
+    }
 }
 </script>
 
 <style scoped>
-
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
 </style>
