@@ -6,7 +6,7 @@
         {{ text }}
         <img id="arrow" :class="{rotate: open }" src="../assets/down-arrow.svg" />
     </button>
-    <button v-else class="button">
+    <button v-else class="button" :type="type" @click="$emit('click')">
         {{ text }}
     </button>
 </template>
@@ -32,7 +32,8 @@ export default {
         background: #DC624E;
         box-shadow: 0px 4px 10px 0px #4328103D;
         border-radius: 3px;
-
+        width: 100%;
+        cursor: pointer;
         font-weight: 900;
         font-size: 14px;
         line-height: 24px;
