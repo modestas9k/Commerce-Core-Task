@@ -1,10 +1,10 @@
 <template>
     <div class="wrapper">
         <div class="header">
-            <img src="../assets/Return.svg" />
+            <img src="../assets/Return.svg" alt="return"/>
             <h3>60-day fit guarantee</h3>
         </div>
-        <p>Either it doesn’t fit or simply you don’t like it You can return it within 60 days for a full refund.
+        <p>Either it does’t fit or simply you don’t like it You can return it within 60 days for a full refund.
             No questions asked.</p>
     </div>
 </template>
@@ -20,9 +20,7 @@ export default {
         display: flex;
         flex-direction: column;
         padding: 24px;
-
-        /* Gray 5 */
-        border: 1px solid #E0E0E0;
+        border: 1px solid var(--gray-5);
         box-sizing: border-box;
         border-radius: 3px;
     }
@@ -44,7 +42,6 @@ export default {
         line-height: 140%;
         /* or 20px */
 
-        /* Gray 3 */
-        color: #828282;
+        color: var(--gray-3);
     }
 </style>

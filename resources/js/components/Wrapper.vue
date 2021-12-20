@@ -27,23 +27,17 @@ export default {
         font-weight: bold;
         font-size: 12px;
         margin: 0;
-
         line-height: 24px;
         /* or 200% */
 
         letter-spacing: 0.07em;
         text-transform: uppercase;
-
-        /* M1 */
-        color: #DC624E;
+        color: var(--main-color);
     }
     .children-wrapper {
-        background: #FFFFFF;
+        background: var(--white);
         padding: 24px;
-
-        /* B2 */
-        border: 1px solid #E9D6C5;
-        box-sizing: border-box;
+        border: 1px solid var(--B2);
         border-radius: 6px;
     }
 </style>

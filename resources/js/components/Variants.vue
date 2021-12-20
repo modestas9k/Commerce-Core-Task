@@ -7,7 +7,7 @@
     <div v-show="toggleChange">
         <div class="variants-body">
             <div  v-for="variant in variants" :key="variant.id" @click="selected = variant.id" class="variants-item">
-                <img :class="{ active: variant.id === selectedProduct.id }" :src="require(`../assets/${variant.imgSrc}`).default" :alt="variant.imgAlt">
+                <img :class="{ active: variant.id === selected }" :src="require(`../assets/${variant.imgSrc}`).default" :alt="variant.imgAlt">
                 <span class="variants-title"><strong>{{ variant.productType }}</strong> {{ variant.name }}</span>
                 <span class="variants-price">${{ variant.price }}</span>
             </div>
@@ -32,7 +32,7 @@ export default {
     data() {
         return {
             toggleChange: false,
-            selected: null
+            selected: this.selectedProduct.id
         }
     },
     methods: {
@@ -61,8 +61,7 @@ export default {
     .variants-body {
         display: flex;
         flex-direction: column;
-         /* Gray 6 */
-        border-top: 1px solid #F2F2F2;
+        border-top: 1px solid var(--gray-6);
         padding-top: 16px;
         margin-top: 16px;
     }
@@ -74,10 +73,11 @@ export default {
         margin-bottom: 7px;
     }
     img {
-        background: #F8F1EB;
+        background: var(--B1);
     }
     .active {
-        border: 1px solid #DC624E;
+        box-sizing: border-box;
+        box-shadow: 0px 0px 0px 1px var(--main-color);
     }
     .variants-price {
         font-weight: 900;
@@ -86,8 +86,7 @@ export default {
         line-height: 24px;
         /* or 171% */
 
-        /* Gray 1 */
-        color: #333333;
+        color: var(--gray-1);
     }
     .variants-foot {
         display: flex;

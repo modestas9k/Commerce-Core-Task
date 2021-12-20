@@ -4,7 +4,7 @@
     </button>
     <button v-else-if="type === 'toggle'" @click="$emit('click')"  class="toggle">
         {{ text }}
-        <img id="arrow" :class="{rotate: open }" src="../assets/down-arrow.svg" />
+        <img id="arrow" :class="{rotate: open }" src="../assets/down-arrow.svg" alt="arrow" />
     </button>
     <button v-else class="button" :type="type" @click="$emit('click')">
         {{ text }}
@@ -29,7 +29,7 @@ export default {
 <style scoped>
     .button {
         padding: 16px 0;
-        background: #DC624E;
+        background: var(--main-color);
         box-shadow: 0px 4px 10px 0px #4328103D;
         border-radius: 3px;
         width: 100%;
@@ -42,9 +42,7 @@ export default {
         text-align: center;
         letter-spacing: 0.07em;
         text-transform: uppercase;
-
-        /* White */
-        color: #FFFFFF;
+        color: var(--white);
     }
     .custom {
         border: 1px solid #000000;
@@ -61,8 +59,7 @@ export default {
         line-height: 24px;
         /* identical to box height, or 171% */
         background: none;
-        /* M1 */
-        color: #DC624E;
+        color: var(--main-color);
     }
     .toggle img {
         margin-left: 10px;
