@@ -1,14 +1,15 @@
-ponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Commerce-Core-Task
+# Commerce-Core Task
 
 Made with Laravel + Vuejs.
 
-# Quik start
+## Quik start
 
-1. Git clone repository.
-2. cp .env.example .env
-3. composer install
-4. php artisan key:generate
-5. npm install
-6. npm run dev
+Git clone repository.
+
+In root folder write these commands with terminal:
+    
+1. cp .env.example .env
+2. composer install
+3. php artisan key:generate
+4. npm install
+5. npm run dev
