@@ -28,25 +28,25 @@
         <div>
             <div class="margin-bottom">
                 <h4 class="group-title">Payment Method</h4>
-                <span class="group-description "><img src="../assets/lock.svg"> All Transactions are secure and encrypted</span>
+                <span class="group-description "><img src="../assets/lock.svg" alt="lock"> All Transactions are secure and encrypted</span>
             </div>
             <!-- Credit card -->
             <div class="credit-card margin-bottom">
                 <div class="credit-card-head">
                     <div class="flex-wrapper">
-                        <input class="radio" v-model="creditCard" type="radio" id="credit" name="credit"  />
+                        <input class="radio" v-model="paymentMethod" value="creditCard" type="radio" id="credit" name="credit"  />
                         <label for="credit">Credit card</label>
                     </div>
                     <div class="flex-wrapper gap">
-                        <img src="../assets/cards/visa.svg" />
-                        <img src="../assets/cards/mastercard.svg" />
-                        <img src="../assets/cards/amex.svg" />
-                        <img src="../assets/cards/discover.svg" />
-                        <img src="../assets/cards/americanExpress.svg" />
-                        <img src="../assets/cards/maestro.svg" />
+                        <img src="../assets/cards/visa.svg" alt="visa card" />
+                        <img src="../assets/cards/mastercard.svg" alt="mastercard card"/>
+                        <img src="../assets/cards/amex.svg" alt="amex card" />
+                        <img src="../assets/cards/discover.svg" alt="discover card" />
+                        <img src="../assets/cards/americanExpress.svg" alt="american express card" />
+                        <img src="../assets/cards/maestro.svg" alt="maestro card" />
                     </div>
                 </div>
-                <div class="credit-card-body">
+                <div v-show="paymentMethod === 'creditCard'" class="credit-card-body">
                     <input type="number" placeholder="Card number" v-model="creditNumber" />
                     <div class="flex-wrapper">
                         <input class="margin-right fix-width" type="number" v-model="creditYear" placeholder="MM/YY" />
@@ -65,10 +65,10 @@
         <Button text="Complete order" type="submit" class="margin-bottom" />
         <!-- Security logos -->
         <div class="flex-wrapper gap center">
-            <img src="../assets/security/NortonSecure.svg">
-            <img src="../assets/security/VeriSign.svg">
-            <img src="../assets/security/McAfee.svg">
-            <img src="../assets/security/Comodo.svg">
+            <img src="../assets/security/NortonSecure.svg" alt="Norton secure"/>
+            <img src="../assets/security/VeriSign.svg" alt="Veri sign"/>
+            <img src="../assets/security/McAfee.svg" alt="McAfee"/>
+            <img src="../assets/security/Comodo.svg" alt="Comodo"/>
         </div>
     </form>
 </template>
@@ -78,10 +78,14 @@ import Input from "./Input";
 import Button from "./Button";
 export default {
     name: "Form",
+    props: {
+        product: Object
+    },
     components: {Button, Input},
     data() {
         return {
             errors: [],
+            product: this.product,
             firstName: '',
             lastName: '',
             email: '',
@@ -90,7 +94,7 @@ export default {
             country: '',
             regionState: '',
             postalCode: null,
-            creditCard: false,
+            paymentMethod: '',
             creditNumber: null,
             creditYear: null,
             creditCVV: null
@@ -100,39 +104,40 @@ export default {
         submit() {
             this.errors = [];
 
-          if (this.creditCard === 'on') {
-              if(!this.creditNumber) {
-                  this.errors.push('Enter credit card number.');
-              } else if(this.creditNumber.toString().length !==  16) {
-                  this.errors.push('Credit card number should have 16 digits.')
-              }
-              if(!this.creditYear) {
-                  this.errors.push('Enter credit card expiration date.');
-              } else if(this.creditYear.toString().length !== 4) {
-                  this.errors.push('Credit card expiration date should have 4 digits.');
-              }
-              if(!this.creditCVV) {
-                  this.errors.push('Enter credit card CVV.');
-              } else if(this.creditCVV.toString().length !== 3) {
-                  this.errors.push('Credit card CVV should have 3 digits.');
-              }
-          }
-          if(this.errors.length == 0) {
-              console.log(JSON.stringify({
-                  firstName : this.firstName,
-                  lastName: this.lastName,
-                  email: this.email,
-                  address: this.address,
-                  city: this.city,
-                  country: this.country,
-                  regionOrState: this.regionState,
-                  postalCode: this.postalCode,
-                  creditCard: this.creditCard,
-                  creditCardNumber: this.creditNumber,
-                  creditCardExpiration: this.creditYear,
-                  creditCardCVV: this.creditCVV,
-              }))
-          }
+            if (this.paymentMethod === 'creditCard') {
+                if(!this.creditNumber) {
+                   this.errors.push('Enter credit card number.');
+                } else if(this.creditNumber.toString().length !==  16) {
+                    this.errors.push('Credit card number should have 16 digits.')
+                }
+                if(!this.creditYear) {
+                    this.errors.push('Enter credit card expiration date.');
+                } else if(this.creditYear.toString().length !== 4) {
+                    this.errors.push('Credit card expiration date should have 4 digits.');
+                }
+                if(!this.creditCVV) {
+                    this.errors.push('Enter credit card CVV.');
+                } else if(this.creditCVV.toString().length !== 3) {
+                    this.errors.push('Credit card CVV should have 3 digits.');
+                }
+            }
+            if(this.errors.length === 0) {
+                console.log(JSON.stringify({
+                    firstName : this.firstName,
+                    lastName: this.lastName,
+                    email: this.email,
+                    address: this.address,
+                    city: this.city,
+                    country: this.country,
+                    regionOrState: this.regionState,
+                    postalCode: this.postalCode,
+                    creditCard: this.creditCard,
+                    creditCardNumber: this.creditNumber,
+                    creditCardExpiration: this.creditYear,
+                    creditCardCVV: this.creditCVV,
+                    product: this.product
+                }))
+            }
 
         }
     }
@@ -142,42 +147,29 @@ export default {
 <style scoped>
     .group-title {
         margin: 0;
-        /*font-family: Work Sans;*/
         font-style: normal;
         font-weight: 600;
         font-size: 14px;
         line-height: 140%;
-        /* identical to box height, or 20px */
-
-        /* Gray 1 */
-        color: #333333;
+        color: var(--gray-1);
     }
     .group-description {
         font-style: normal;
         font-weight: 500;
         font-size: 12px;
         line-height: 16px;
-        /* identical to box height, or 133% */
-
-        /* Gray 4 */
-        color: #BDBDBD;
+        color: var(--gray-4);
     }
     input {
         width: 100%;
         padding: 12px;
         margin-bottom: 16px;
-        /* #000000 */
-        background: #FFFFFF;
-        /* Gray 5 */
-        border: 1px solid #E0E0E0;
+        background: var(--white);
+        border: 1px solid var(--gray-5);
         box-sizing: border-box;
         border-radius: 3px;
         font-size: 14px;
         line-height: 24px;
-        /* identical to box height, or 171% */
-
-        /* Gray 4 */
-        /* #BDBDBD;*/
     }
     input[type=number]::-webkit-inner-spin-button,
     input[type=number]::-webkit-outer-spin-button {
@@ -191,15 +183,13 @@ export default {
     label {
         font-size: 14px;
         line-height: 140%;
-        /* Gray 1 */
-        color: #333333;
+        color: var(--gray-1);
     }
     .gap {
         gap: 10px;
     }
     .credit-card {
-        /* Gray 6 */
-        border: 1px solid #F2F2F2;
+        border: 1px solid var(--gray-6);
         box-sizing: border-box;
         border-radius: 6px;
     }
@@ -212,7 +202,7 @@ export default {
     .credit-card-body {
         padding: 17px 15px 0px 15px;
         background: #FAFAFA;
-        border-top: 1px solid #E0E0E0;
+        border-top: 1px solid var(--gray-5);
     }
     .flex-wrapper {
         display: flex;
@@ -232,6 +222,6 @@ export default {
         justify-content: center;
     }
     .text-red {
-        color: orangered;
+        color: var(--main-color);
     }
 </style>
