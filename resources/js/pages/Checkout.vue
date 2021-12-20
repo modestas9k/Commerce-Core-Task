@@ -5,9 +5,7 @@
                 <Variants :selectedProduct="selectedProduct" :variants="variants" @change-product="changeProduct"/>
             </Wrapper>
             <Wrapper title="payment and shipping">
-                <Form>
-
-                </Form>
+                <Form :product="selectedProduct" />
             </Wrapper>
         </div>
         <div class="checkout-side">
@@ -158,5 +156,17 @@ export default {
         line-height: 28px;
 
         color: #333333;
+    }
+    @media screen and (max-width: 700px) {
+        .checkout {
+            flex-direction: column-reverse;
+        }
+        .checkout-main {
+            padding: 0;
+        }
+        .checkout-side {
+            padding: 24px;
+            min-width: 200px;
+        }
     }
 </style>
