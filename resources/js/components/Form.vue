@@ -74,14 +74,14 @@
 </template>
 
 <script>
-import Input from "./Input";
 import Button from "./Button";
+
 export default {
     name: "Form",
     props: {
         product: Object
     },
-    components: {Button, Input},
+    components: {Button},
     data() {
         return {
             errors: [],
